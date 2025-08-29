@@ -2,6 +2,9 @@
 
 A modern, web-based audio visualizer that transforms your music into stunning dotted waveform animations. Perfect for content creators, musicians, and anyone wanting to add visual flair to their audio.
 
+<img width="1217" height="1257" alt="image" src="https://github.com/user-attachments/assets/9400e4b9-9115-4728-9a14-23570027691f" />
+
+
 
 ## ✨ Features
 
