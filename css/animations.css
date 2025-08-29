@@ -1,0 +1,369 @@
+
+.pulse {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { 
+        box-shadow: 0 0 0 0 rgba(0, 210, 255, 0.4);
+        transform: scale(1);
+    }
+    70% { 
+        box-shadow: 0 0 0 12px rgba(0, 210, 255, 0);
+        transform: scale(1.02);
+    }
+    100% { 
+        box-shadow: 0 0 0 0 rgba(0, 210, 255, 0);
+        transform: scale(1);
+    }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.3s ease-out;
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.slide-in-right {
+    animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(30px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.scale-in {
+    animation: scaleIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scaleIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.bounce {
+    animation: bounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes bounce {
+    0% { transform: scale(0.3) rotate(-5deg); opacity: 0; }
+    50% { transform: scale(1.05) rotate(1deg); }
+    70% { transform: scale(0.9) rotate(-1deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.progress-fill {
+    animation: progressGlow 2s infinite;
+}
+
+@keyframes progressGlow {
+    0%, 100% {
+        background: var(--accent-gradient);
+        box-shadow: 0 0 10px rgba(0, 210, 255, 0.3);
+    }
+    50% {
+        background: linear-gradient(135deg, #00d2ff, #3decf7);
+        box-shadow: 0 0 20px rgba(0, 210, 255, 0.6);
+    }
+}
+
+.canvas-loading {
+    position: relative;
+}
+
+.canvas-loading::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, 
+        transparent 30%, 
+        rgba(0, 210, 255, 0.1) 50%, 
+        transparent 70%
+    );
+    animation: shimmer 2s infinite;
+    z-index: 1;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.glow {
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 10px rgba(0, 210, 255, 0.2);
+    }
+    to {
+        box-shadow: 0 0 20px rgba(0, 210, 255, 0.6), 0 0 30px rgba(0, 210, 255, 0.3);
+    }
+}
+
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.ripple:active::before {
+    width: 300px;
+    height: 300px;
+}
+
+.audio-pulse {
+    animation: audioPulse 0.1s ease-out;
+}
+
+@keyframes audioPulse {
+    0% { transform: scaleY(1); }
+    50% { transform: scaleY(1.2); }
+    100% { transform: scaleY(1); }
+}
+
+[data-theme] {
+    transition: 
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.status-enter {
+    animation: statusEnter 0.3s ease-out;
+}
+
+@keyframes statusEnter {
+    from {
+        opacity: 0;
+        transform: translateY(10px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.status-exit {
+    animation: statusExit 0.2s ease-in;
+}
+
+@keyframes statusExit {
+    from {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.95);
+    }
+}
+
+.modal-enter {
+    animation: modalEnter 0.3s ease-out;
+}
+
+@keyframes modalEnter {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.modal-exit {
+    animation: modalExit 0.2s ease-in;
+}
+
+@keyframes modalExit {
+    from {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.8) translateY(20px);
+    }
+}
+
+@keyframes modalBackdropFade {
+    from {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+        -webkit-backdrop-filter: blur(0px);
+    }
+    to {
+        opacity: 1;
+        backdrop-filter: blur(20px) saturate(1.2);
+        -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    }
+}
+
+.drop-zone.drag-over {
+    animation: dragOver 0.5s ease-in-out;
+    border-color: var(--accent-primary);
+}
+
+@keyframes dragOver {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.02); }
+}
+
+.drop-zone.file-dropped {
+    animation: fileDropped 0.6s ease-out;
+}
+
+@keyframes fileDropped {
+    0% {
+        background: var(--bg-secondary);
+        transform: scale(1);
+    }
+    30% {
+        background: rgba(0, 210, 255, 0.1);
+        transform: scale(1.05);
+    }
+    100% {
+        background: var(--bg-secondary);
+        transform: scale(1);
+    }
+}
+
+.control-input:focus,
+.control-range:focus {
+    animation: inputFocus 0.2s ease-out;
+}
+
+@keyframes inputFocus {
+    from {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.btn:active {
+    animation: buttonClick 0.1s ease-out;
+}
+
+@keyframes buttonClick {
+    0% { transform: scale(1) translateY(-2px); }
+    50% { transform: scale(0.98) translateY(0); }
+    100% { transform: scale(1) translateY(-2px); }
+}
+
+.success-animation {
+    animation: success 0.6s ease-out;
+}
+
+@keyframes success {
+    0% {
+        transform: scale(1);
+        background: var(--bg-secondary);
+    }
+    50% {
+        transform: scale(1.05);
+        background: rgba(0, 255, 136, 0.1);
+    }
+    100% {
+        transform: scale(1);
+        background: var(--bg-secondary);
+    }
+}
+
+.error-animation {
+    animation: error 0.6s ease-out;
+}
+
+@keyframes error {
+    0% {
+        transform: scale(1);
+        background: var(--bg-secondary);
+    }
+    25% {
+        transform: scale(1.02) translateX(-5px);
+        background: rgba(255, 107, 107, 0.1);
+    }
+    50% {
+        transform: scale(1.02) translateX(5px);
+    }
+    75% {
+        transform: scale(1.02) translateX(-2px);
+    }
+    100% {
+        transform: scale(1) translateX(0);
+        background: var(--bg-secondary);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .pulse,
+    .float,
+    .glow {
+        animation: none;
+    }
+}
