@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Primary Meta Tags -->
+    <title>Waveform Studio - Transform Audio into Visual Art</title>
+    <meta name="title" content="Waveform Studio - Transform Audio into Visual Art">
+    <meta name="description" content="Create stunning visual waveforms from your audio files. Real-time visualization with customizable dots, colors, and effects. Export to MP4/WebM with clean audio.">
+    <meta name="keywords" content="audio visualization, waveform, audio art, visual music, audio to video, waveform generator, music visualization">
+    <meta name="author" content="Waveform Studio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <link rel="manifest" href="assets/site.webmanifest">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://drbaph.is-a.dev/WaveStudio">
+    <meta property="og:title" content="Waveform Studio - Transform Audio into Visual Art">
+    <meta property="og:description" content="Create stunning visual waveforms from your audio files. Real-time visualization with customizable dots, colors, and effects.">
+    <meta property="og:image" content="https://drbaph.is-a.dev/WaveStudio/assets/og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="1200">
+    <meta property="og:image:alt" content="Waveform Studio - Audio Visualization Tool">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://drbaph.is-a.dev/WaveStudio">
+    <meta property="twitter:title" content="Waveform Studio - Transform Audio into Visual Art">
+    <meta property="twitter:description" content="Create stunning visual waveforms from your audio files. Real-time visualization with customizable dots, colors, and effects.">
+    <meta property="twitter:image" content="https://drbaph.is-a.dev/WaveStudio/assets/og.jpg">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="theme-color" content="#00d2ff">
+    <meta name="msapplication-TileColor" content="#00d2ff">
+    <meta name="msapplication-config" content="assets/browserconfig.xml">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Waveform Studio</h1>
+            <p class="subtitle">
+                Transform your audio into mesmerizing visual art with customizable dot waveforms. 
+                Perfect for music visualizers, social media content, and creative projects.
+            </p>
+            
+            <!-- Header Controls -->
+            <div class="header-controls">
+                <a href="https://github.com/Saganaki22/WaveStudio" target="_blank" rel="noopener noreferrer" class="github-link" aria-label="View on GitHub">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                    </svg>
+                </a>
+                <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+                    <span class="theme-icon">🌙</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <div id="dropZone" class="drop-zone pulse" role="button" tabindex="0" aria-label="Upload audio file">
+                <div class="drop-icon" aria-hidden="true">📁</div>
+                <h2 class="drop-text">Upload Audio File</h2>
+                <p class="drop-subtext">
+                    Drag & drop your audio file here or <span class="strong">browse</span> your device. 
+                    Supports MP3, WAV, and OGG formats.
+                </p>
+                <input type="file" id="audioFile" accept="audio/*" hidden aria-describedby="drop-subtext" />
+            </div>
+
+            <!-- Canvas Container -->
+            <div class="canvas-container" style="display: none;" role="img" aria-label="Waveform visualization">
+                <button class="remove-audio" id="removeAudio" aria-label="Remove audio file">×</button>
+                <canvas id="canvas" width="1280" height="720"></canvas>
+                
+                <!-- Export Progress -->
+                <div class="export-progress" id="exportProgress" style="display: none;">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <span class="progress-text" id="progressText">Exporting...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="controls-section" style="display: none;">
+            <h2 class="section-title">
+                <span>Customization</span>
+                <button id="presetBtn" class="preset-btn">Presets</button>
+            </h2>
+
+            <div id="controls" class="controls-grid">
+                <!-- Animation Style -->
+                <div class="control-group">
+                    <label class="control-label" for="style">
+                        <span>Animation Style</span>
+                    </label>
+                    <select id="style" class="control-input">
+                        <option value="scrolling">Scrolling Wave</option>
+                        <option value="breathing">Breathing Pulse</option>
+                        <option value="radial">Radial Burst</option>
+                        <option value="bars">Frequency Bars</option>
+                    </select>
+                    <span class="hint">Choose how your waveform animates</span>
+                </div>
+
+                <!-- Opacity Mode -->
+                <div class="control-group">
+                    <label class="control-label" for="opacityMode">
+                        <span>Fade Effects</span>
+                    </label>
+                    <select id="opacityMode" class="control-input">
+                        <option value="uniform">Uniform (Solid)</option>
+                        <option value="3_levels">3-Level Fade</option>
+                        <option value="5_levels">5-Level Fade</option>
+                        <option value="10_levels">Smooth Gradient</option>
+                    </select>
+                    <span class="hint">Controls dot transparency variation</span>
+                </div>
+
+                <!-- Dot Size -->
+                <div class="control-group">
+                    <label class="control-label" for="dotSize">
+                        <span>Dot Size</span>
+                        <span class="value-display" id="dotSizeValue">6</span>
+                    </label>
+                    <div class="range-container">
+                        <input type="range" id="dotSize" class="control-range" min="1" max="35" value="6" />
+                    </div>
+                </div>
+
+                <!-- Dot Spacing -->
+                <div class="control-group">
+                    <label class="control-label" for="dotSpacing">
+                        <span>Dot Spacing</span>
+                        <span class="value-display" id="dotSpacingValue">6</span>
+                    </label>
+                    <div class="range-container">
+                        <input type="range" id="dotSpacing" class="control-range" min="2" max="45" value="6" />
+                    </div>
+                </div>
+
+                <!-- Dot Color -->
+                <div class="control-group">
+                    <label class="control-label" for="dotColor">
+                        <span>Dot Color</span>
+                    </label>
+                    <input type="color" id="dotColor" class="control-color" value="#00d2ff" />
+                </div>
+
+                <!-- Background Color -->
+                <div class="control-group">
+                    <label class="control-label" for="bgColor">
+                        <span>Background</span>
+                    </label>
+                    <input type="color" id="bgColor" class="control-color" value="#000000" />
+                </div>
+
+                <!-- Amplitude -->
+                <div class="control-group">
+                    <label class="control-label" for="amp">
+                        <span>Amplitude</span>
+                        <span class="value-display" id="ampValue">60%</span>
+                    </label>
+                    <div class="range-container">
+                        <input type="range" id="amp" class="control-range" min="5" max="250" value="60" />
+                    </div>
+                    <span class="hint">Controls waveform height/radius</span>
+                </div>
+
+                <!-- Aspect Ratio -->
+                <div class="control-group">
+                    <label class="control-label" for="aspectRatio">
+                        <span>Aspect Ratio</span>
+                    </label>
+                    <select id="aspectRatio" class="control-input">
+                        <option value="16:9" selected>Landscape (16:9)</option>
+                        <option value="9:16">Portrait (9:16)</option>
+                        <option value="1:1">Square (1:1)</option>
+                    </select>
+                    <span class="hint">Changes canvas size and export format</span>
+                </div>
+
+                <!-- Frame Rate -->
+                <div class="control-group">
+                    <label class="control-label" for="fps">
+                        <span>Frame Rate</span>
+                        <span class="value-display" id="fpsValue">30 fps</span>
+                    </label>
+                    <select id="fps" class="control-input">
+                        <option value="10">10 fps</option>
+                        <option value="15">15 fps</option>
+                        <option value="30" selected>30 fps</option>
+                        <option value="60">60 fps</option>
+                    </select>
+                    <span class="hint">Higher FPS = smoother animation, larger file</span>
+                </div>
+
+                <!-- Time Window (for scrolling) -->
+                <div class="control-group" id="windowGroup">
+                    <label class="control-label" for="window">
+                        <span>Time Window</span>
+                        <span class="value-display" id="windowValue">2.0s</span>
+                    </label>
+                    <div class="range-container">
+                        <input type="range" id="window" class="control-range" min="0.5" max="10" step="0.1" value="2" />
+                    </div>
+                    <span class="hint">Affects scrolling animation only</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="button-group">
+                <button id="playBtn" class="btn btn-primary" disabled>
+                    <span id="playText">Preview Waveform</span>
+                    <div class="btn-loading" id="playLoading" style="display: none;"></div>
+                </button>
+                <button id="recordBtn" class="btn btn-secondary" disabled>
+                    <span id="recordText">Export Video</span>
+                    <div class="btn-loading" id="recordLoading" style="display: none;"></div>
+                </button>
+            </div>
+
+            <!-- Export Options -->
+            <div class="export-options" id="exportOptions" style="display: none;">
+                <h3>Export Settings</h3>
+                <div class="export-grid">
+                    <div class="control-group">
+                        <label for="exportFormat">Format</label>
+                        <select id="exportFormat">
+                            <option value="webm" selected>WebM (Recommended)</option>
+                            <option value="mp4">MP4 (Experimental)</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="exportQuality">Quality</label>
+                        <select id="exportQuality">
+                            <option value="SD">SD (480p)</option>
+                            <option value="HD" selected>HD (720p)</option>
+                            <option value="Full HD">Full HD (1080p)</option>
+                        </select>
+                        <span class="hint">Higher quality = larger file size</span>
+                    </div>
+                </div>
+                
+                <!-- Export Controls -->
+                <div class="export-controls">
+                    <button id="confirmExportBtn" class="btn btn-primary">
+                        <span>Start Export</span>
+                    </button>
+                    <button id="stopExportBtn" class="btn btn-secondary" style="display: none;">
+                        <span>Stop Export</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div class="status" id="status" role="status" aria-live="polite">
+                Ready to create your visual masterpiece
+            </div>
+        </div>
+
+        <!-- Preset Modal -->
+        <div class="modal" id="presetModal" style="display: none;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Presets</h3>
+                    <button class="modal-close" id="modalClose">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="preset-list" id="presetList">
+                        <!-- Preset items will be generated by JS -->
+                    </div>
+                    <div class="preset-actions">
+                        <input type="text" id="presetName" placeholder="Enter preset name..." />
+                        <button id="savePreset" class="btn btn-small">Save Current</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer for mobile/tablet -->
+    <footer class="mobile-footer">
+        <div class="mobile-footer-controls">
+            <a href="https://github.com/Saganaki22/WaveStudio" target="_blank" rel="noopener noreferrer" class="github-link" aria-label="View on GitHub">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                </svg>
+            </a>
+            <button id="mobileThemeToggle" class="theme-toggle" aria-label="Toggle dark/light mode">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
